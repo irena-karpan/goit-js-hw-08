@@ -51,6 +51,13 @@ ul {
 }
 .gallery-item:hover {
   cursor: pointer;
+  transform: scale(1.05);
+}
+
+.gallery-item {
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .gallery-link {

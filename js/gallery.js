@@ -80,8 +80,60 @@ function markup(arr) {
         alt="${description}" />
         </a>
         </li>`
-    }).join("");
+    });
+    
+}
+
+imagesList.insertAdjacentHTML("afterbegin", markup(images).join(""));
+
+imagesList.addEventListener("click", logUrl);  
+
+
+function logUrl(event) {
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
+
+    const closeModal = event => {
+        if (event.code === "Escape") {
+        instance.close();
+        document.removeEventListener("keydown", closeModal);
+    }}
+    
+    event.preventDefault();
+
+    const instance = basicLightbox.create(`
+        <img src = ${event.target.dataset.source} alt= "${event.target.alt}">`);
+    
+
+    instance.show();
+
+    document.addEventListener("keydown", closeModal);
 }
 
 
-imagesList.insertAdjacentHTML("afterbegin",markup(images));
+
+
+//  const instance = basicLightbox.create(
+//     `<img src="${event.target.dataset.source}" alt="${event.target.alt}">`,
+//     {
+//       onShow: (instance) => {
+//         document.addEventListener('keydown', handleEsc);
+
+//         function handleEsc(event) {
+//           if (event.code === 'Escape') {
+//             instance.close();
+//           }
+//         }
+
+//         instance.element().handleEsc = handleEsc;
+//       },
+
+//       onClose: (instance) => {
+//         document.removeEventListener(
+//           'keydown',
+//           instance.element().handleEsc
+//         );
+//       },
+//     }
+//   );
