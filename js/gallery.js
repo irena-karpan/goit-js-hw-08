@@ -94,19 +94,21 @@ function logUrl(event) {
         return;
     }
 
+    
+    
+    event.preventDefault();
+
+    const instance = basicLightbox.create(`
+        <img src = "${event.target.dataset.source}" alt= "${event.target.alt}">`);
+    
+
+    instance.show();
+
     const closeModal = event => {
         if (event.code === "Escape") {
         instance.close();
         document.removeEventListener("keydown", closeModal);
     }}
-    
-    event.preventDefault();
-
-    const instance = basicLightbox.create(`
-        <img src = ${event.target.dataset.source} alt= "${event.target.alt}">`);
-    
-
-    instance.show();
 
     document.addEventListener("keydown", closeModal);
 }
